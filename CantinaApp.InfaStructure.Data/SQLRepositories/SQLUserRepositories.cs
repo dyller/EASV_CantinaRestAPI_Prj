@@ -1,36 +1,50 @@
 ﻿using CantinaApp.Core.DomainServices;
 using CantinaApp.Core.Entity.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CantinaApp.InfaStructure.Data.SQLRepositories
 {
     public class SQLUserRepositories : IUserRepositories<Users>
     {
+
+        private readonly CantinaAppContext db;
+
+        public SQLUserRepositories(CantinaAppContext context)
+        {
+            db = context;
+        }
+
         public void Add(Users entity)
         {
-            throw new NotImplementedException();
+            db.User.Add(entity);
+            db.SaveChanges();
         }
 
         public void Edit(Users entity)
         {
-            throw new NotImplementedException();
+            db.Entry(entity).State = EntityState.Modified;
+            db.SaveChanges();
         }
 
         public Users Get(long id)
         {
-            throw new NotImplementedException();
+            return db.User.FirstOrDefault(b => b.Id == id);
         }
 
         public IEnumerable<Users> GetAll()
         {
-            throw new NotImplementedException();
+            return db.User.ToList();
         }
 
         public void Remove(long id)
         {
-            throw new NotImplementedException();
+            var item = db.User.FirstOrDefault(b => b.Id == id);
+            db.User.Remove(item);
+            db.SaveChanges();
         }
     }
 }

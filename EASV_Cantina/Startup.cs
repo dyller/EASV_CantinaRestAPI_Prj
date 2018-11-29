@@ -139,24 +139,26 @@ namespace EASV_Cantina
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // Initialize the database and the AuthenticationHelper.
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                // Initialize the database
+                var services = scope.ServiceProvider;
+                var dbContext = services.GetService<CantinaAppContext>();
+                var dbInitializer = services.GetService<IDBInitializer>();
+                dbInitializer.SeedDb(dbContext);
+            }
+
+            // For convenience, I want detailed exception information always. However, this statement should
+            // be removed, when the application is released.
+            app.UseDeveloperExceptionPage();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                using (var scope = app.ApplicationServices.CreateScope())
-                {
-                    var ctx = scope.ServiceProvider.GetService<CantinaAppContext>();
-                    ctx.Database.EnsureCreated();
-                    DBInitializer.SeedDb(ctx);
-                }
             }
             else
             {
-                using (var scope = app.ApplicationServices.CreateScope())
-                {
-                    var ctx = scope.ServiceProvider.GetService<CantinaAppContext>();
-                    ctx.Database.EnsureCreated();
-                    DBInitializer.SeedDb(ctx);
-                }
                 app.UseHsts();
             }
 

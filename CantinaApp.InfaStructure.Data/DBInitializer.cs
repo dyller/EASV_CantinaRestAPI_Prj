@@ -1,15 +1,24 @@
 ﻿using CantinaApp.Core.Entity.Entities;
 using CantinaApp.Core.Entity.Models;
+using EASV_CantinaRestAPI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace CantinaApp.InfaStructure.Data
 {
-    public class DBInitializer
+    public class DBInitializer : IDBInitializer
     {
-        public static void SeedDb(CantinaAppContext ctx)
+        public IAuthenticationHelper authenticationHelper;
+
+        public DBInitializer(IAuthenticationHelper authHelper)
         {
+            authenticationHelper = authHelper;
+        }
+
+        public void SeedDb(CantinaAppContext ctx)
+        {
+
             string password = "4321";
             byte[] passwordHashJoe, passwordSaltJoe, passwordHashAnn, passwordSaltAnn;
             CreatePasswordHash(password, out passwordHashJoe, out passwordSaltJoe);
