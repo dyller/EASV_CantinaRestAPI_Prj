@@ -19,7 +19,7 @@ namespace CantinaApp.InfaStructure.Data
         public void SeedDb(CantinaAppContext ctx)
         {
 
-            string password = "4321";
+            string password = "6969";
             byte[] passwordHashJoe, passwordSaltJoe, passwordHashAnn, passwordSaltAnn;
             CreatePasswordHash(password, out passwordHashJoe, out passwordSaltJoe);
             CreatePasswordHash(password, out passwordHashAnn, out passwordSaltAnn);
@@ -27,13 +27,13 @@ namespace CantinaApp.InfaStructure.Data
             List<Users> users = new List<Users>
             {
                 new Users {
-                    Username = "kris",
+                    Username = "sam",
                     PasswordHash = passwordHashJoe,
                     PasswordSalt = passwordSaltJoe,
                     IsAdmin = true
                 },
                 new Users {
-                    Username = "jacob",
+                    Username = "kasper",
                     PasswordHash = passwordHashAnn,
                     PasswordSalt = passwordSaltAnn,
                     IsAdmin = false
