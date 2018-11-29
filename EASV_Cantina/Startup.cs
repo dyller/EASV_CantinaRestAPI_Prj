@@ -39,6 +39,14 @@ namespace EASV_Cantina
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            // Create a byte array with random values. This byte array is used
+            // to generate a key for signing JWT tokens.
+            Byte[] secretBytes = new byte[40];
+            Random rand = new Random();
+            rand.NextBytes(secretBytes);
+
+            // Add JWT based authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -48,7 +56,7 @@ namespace EASV_Cantina
                     ValidateIssuer = false,
                     //ValidIssuer = "TodoApi",
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = JwtSecurityKey.Key,
+                    IssuerSigningKey = new SymmetricSecurityKey(secretBytes),
                     ValidateLifetime = true, //validate the expiration and not before values in the token
                     ClockSkew = TimeSpan.FromMinutes(5) //5 minute tolerance for the expiration date
                 };
@@ -67,6 +75,15 @@ namespace EASV_Cantina
                 services.AddDbContext<CantinaAppContext>(opt =>
                          opt.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             }
+
+            // Register database initializer
+            services.AddTransient<IDBInitializer, DBInitializer>();
+
+            // Register the AuthenticationHelper in the helpers folder for dependency
+            // injection. It must be registered as a singleton service. The AuthenticationHelper
+            // is instantiated with a parameter. The parameter is the previously created
+            // "secretBytes" array, which is used to generate a key for signing JWT tokens,
+            services.AddSingleton<IAuthenticationHelper>(new AuthenticationHelper(secretBytes));
 
             services.AddScoped<IMainFoodRepositories, SQLMainFoodRepositories>();
             services.AddScoped<IMainFoodServices, MainFoodServices>();
