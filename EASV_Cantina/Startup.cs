@@ -129,7 +129,7 @@ namespace EASV_Cantina
                     builder => builder.WithOrigins("https://petshop-684d3.firebaseapp.com").AllowAnyHeader()
                         .AllowAnyMethod());
                 options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("https://localhost:44332").AllowAnyHeader()
+                    builder => builder.WithOrigins("https://localhost:44362").AllowAnyHeader()
                       .AllowAnyMethod());
             });
 

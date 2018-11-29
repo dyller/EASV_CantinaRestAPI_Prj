@@ -41,6 +41,7 @@ namespace EASV_CantinaRestAPI.Controllers
             return Ok(new
             {
                 username = user.Username,
+                user.IsAdmin,
                 token = authenticationHelper.GenerateToken(user)
             });
         }
