@@ -63,7 +63,7 @@ namespace EASV_Cantina
             }
             else
             {
-                // Azure SQL database:
+                // Azure SQL database:dsadasd
                 services.AddDbContext<CantinaAppContext>(opt =>
                          opt.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             }
