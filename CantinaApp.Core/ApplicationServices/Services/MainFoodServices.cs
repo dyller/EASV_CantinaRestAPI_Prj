@@ -81,11 +81,6 @@ namespace CantinaApp.Core.ApplicationServices.Services
             return _mainFoodRepo.ReadMainFood().ToList();
         }
 
-        public MainFood GetMainFoodInstance()
-        {
-            return new MainFood();
-        }
-
         public MainFood UpdateMainFood(MainFood mainFoodUpdate)
         {
             return _mainFoodRepo.UpdateMainFood(mainFoodUpdate);
