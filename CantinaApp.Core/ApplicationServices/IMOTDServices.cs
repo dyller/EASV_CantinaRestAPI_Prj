@@ -7,15 +7,13 @@ namespace CantinaApp.Core.ApplicationServices
 {
     public interface IMOTDServices
     {
-        MOTD GetMOTDsInstance();
+        MOTD GetMOTDById(int id);
 
         List<MOTD> GetMOTDs();
 
         MOTD AddMOTD(MOTD motd);
 
         MOTD DeleteMOTD(int id);
-
-        MOTD FindMOTDId(int id);
 
         MOTD UpdateMOTD(MOTD motdUpdate);
     }

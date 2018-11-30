@@ -3,6 +3,7 @@ using CantinaApp.Core.Entity.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CantinaApp.InfaStructure.Data.SQLRepositories
@@ -25,7 +26,11 @@ namespace CantinaApp.InfaStructure.Data.SQLRepositories
 
         public MOTD DeleteMOTD(int id)
         {
-            throw new NotImplementedException();
+
+            var MOTDDeleted = _ctx.MOTD.ToList().FirstOrDefault(b => b.Id == id);
+            _ctx.MOTD.Remove(MOTDDeleted);
+            _ctx.SaveChanges();
+            return MOTDDeleted;
         }
 
         public MOTD GetFoodIconByID(int id)
@@ -33,11 +38,7 @@ namespace CantinaApp.InfaStructure.Data.SQLRepositories
             throw new NotImplementedException();
         }
 
-        public MOTD ReadById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public IEnumerable<MOTD> ReadMOTD()
         {
             return _ctx.MOTD;

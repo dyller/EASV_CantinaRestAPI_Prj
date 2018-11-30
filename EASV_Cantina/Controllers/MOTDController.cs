@@ -34,9 +34,9 @@ namespace EASV_CantinaRestAPI.Controllers
 
         // GET: api/MOTD/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetMOTD([FromRoute] int id)
+        public ActionResult<MOTD> Get(int id)
         {
-            return null;
+            return _MOTDServices.GetMOTDById(id);
         }
 
         // PUT: api/MOTD/5
@@ -56,10 +56,10 @@ namespace EASV_CantinaRestAPI.Controllers
 
         // DELETE: api/MOTD/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMOTD([FromRoute] int id)
+        public ActionResult<MOTD> Delete(int id)
         {
-            return null;
+            return _MOTDServices.DeleteMOTD(id);
         }
-        
+
     }
 }

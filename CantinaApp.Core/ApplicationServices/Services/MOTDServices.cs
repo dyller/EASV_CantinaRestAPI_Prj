@@ -22,22 +22,18 @@ namespace CantinaApp.Core.ApplicationServices.Services
 
         public MOTD DeleteMOTD(int id)
         {
-            throw new NotImplementedException();
+            
+            return _MOTDRepo.DeleteMOTD(id);
         }
-
-        public MOTD FindMOTDId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public List<MOTD> GetMOTDs()
         {
             return _MOTDRepo.ReadMOTD().ToList();
         }
 
-        public MOTD GetMOTDsInstance()
+        public MOTD GetMOTDById(int id)
         {
-            throw new NotImplementedException();
+            return _MOTDRepo.ReadMOTD().ToList().FirstOrDefault(motd => motd.Id == id);
         }
 
         public MOTD UpdateMOTD(MOTD motdUpdate)
