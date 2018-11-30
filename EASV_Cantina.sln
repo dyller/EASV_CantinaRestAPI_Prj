@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EASV_CantinaRestAPI", "EASV_Cantina\EASV_CantinaRestAPI.csproj", "{1C1B82BB-21F6-40BB-8FB7-26028EB54B3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EASV_CantinaRestAPI", "EASV_Cantina\EASV_CantinaRestAPI.csproj", "{1C1B82BB-21F6-40BB-8FB7-26028EB54B3F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{DF5783D5-DF88-4E07-8348-FA801407228F}"
 EndProject
@@ -11,11 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InfaStructure", "InfaStruct
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{A81048C2-787C-4EFC-8CB9-801DF838A7A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CantinaApp.InfaStructure.Data", "CantinaApp.InfaStructure.Data\CantinaApp.InfaStructure.Data.csproj", "{A8D208EC-ADC0-4496-A118-7712A7282C51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CantinaApp.InfaStructure.Data", "CantinaApp.InfaStructure.Data\CantinaApp.InfaStructure.Data.csproj", "{A8D208EC-ADC0-4496-A118-7712A7282C51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CantinaApp.Core.Entity", "CantinaApp.Core.Entity\CantinaApp.Core.Entity.csproj", "{DF536798-AFE3-42C2-BE5B-F02743C6A351}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CantinaApp.Core.Entity", "CantinaApp.Core.Entity\CantinaApp.Core.Entity.csproj", "{DF536798-AFE3-42C2-BE5B-F02743C6A351}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CantinaApp.Core", "CantinaApp.Core\CantinaApp.Core.csproj", "{FF79879D-E470-43D8-A526-8851060581CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CantinaApp.Core", "CantinaApp.Core\CantinaApp.Core.csproj", "{FF79879D-E470-43D8-A526-8851060581CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UTT", "UTT", "{8ABE6C1C-0CAE-48AD-AB70-3999321EC1FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{BFDAB040-0FD6-453E-9563-FC8937C021EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,10 @@ Global
 		{FF79879D-E470-43D8-A526-8851060581CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF79879D-E470-43D8-A526-8851060581CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF79879D-E470-43D8-A526-8851060581CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFDAB040-0FD6-453E-9563-FC8937C021EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFDAB040-0FD6-453E-9563-FC8937C021EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFDAB040-0FD6-453E-9563-FC8937C021EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFDAB040-0FD6-453E-9563-FC8937C021EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +56,7 @@ Global
 		{A8D208EC-ADC0-4496-A118-7712A7282C51} = {F5210DD8-E9A3-4AD4-BF2B-96F322F5B14F}
 		{DF536798-AFE3-42C2-BE5B-F02743C6A351} = {DF5783D5-DF88-4E07-8348-FA801407228F}
 		{FF79879D-E470-43D8-A526-8851060581CD} = {DF5783D5-DF88-4E07-8348-FA801407228F}
+		{BFDAB040-0FD6-453E-9563-FC8937C021EE} = {8ABE6C1C-0CAE-48AD-AB70-3999321EC1FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7A930C0A-2D1F-4367-BCE7-3754C007DBC5}

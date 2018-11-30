@@ -1,55 +1,94 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
+using CantinaApp.Core.DomainServices;
 using CantinaApp.Core.Entity.Entities;
 
 namespace CantinaApp.Core.ApplicationServices.Services
 {
     public class MainFoodServices : IMainFoodServices
     {
+        readonly IMainFoodRepositories _mainFoodRepo;
+        readonly IIngredientsRepositories _ingredientsRepo;
+        readonly IAllergensRepositories _allergensRepo;
+
+        public MainFoodServices(IMainFoodRepositories mainFoodRepo, 
+            IIngredientsRepositories ingredientsRepo, IAllergensRepositories allergensRepo)
+        {
+            _mainFoodRepo = mainFoodRepo;
+            _ingredientsRepo = ingredientsRepo;
+            _allergensRepo = allergensRepo;
+        }
+
         public MainFood AddMainFood(MainFood mainFood)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(mainFood.MainFoodName))
+            {
+                throw new InvalidOperationException("Main Food needs a name.");
+            }
+            return _mainFoodRepo.CreateMainFood(mainFood);
         }
 
         public MainFood DeleteMainFood(int id)
         {
-            throw new NotImplementedException();
+            if (id < 1)
+            {
+                throw new InvalidOperationException("Main Food Id needs to be larger than 1.");
+            }
+            return _mainFoodRepo.DeleteMainFood(id);
         }
 
         public MainFood FindMainFoodId(int id)
         {
-            throw new NotImplementedException();
+            return _mainFoodRepo.ReadById(id);
         }
 
         public MainFood FindMainFoodIdIncludeAllergents(int id)
         {
-            throw new NotImplementedException();
+            var mFood = _mainFoodRepo.ReadByIdIncludeAllergens(id);
+            return mFood;
+        }
+
+        public MainFood FindMainFoodIdIncludeFoodIcon(int id)
+        {
+            var mFood = _mainFoodRepo.ReadByIdIncludeFoodIcons(id);
+            return mFood;
         }
 
         public MainFood FindMainFoodIdIncludeIngredients(int id)
         {
-            throw new NotImplementedException();
+            var mFood = _mainFoodRepo.ReadByIdIncludeIngredients(id);
+            return mFood;
         }
 
         public List<MainFood> GetFilteredMainFood(Filter filter)
         {
-            throw new NotImplementedException();
+            if (filter.CurrentPage < 0 || filter.ItemsPrPage < 0)
+            {
+                throw new InvalidDataException("Current page and Items page must be zero or more");
+            }
+            if ((filter.CurrentPage - 1 * filter.ItemsPrPage) >= _mainFoodRepo.Count())
+            {
+                throw new InvalidDataException("Index out of bounds, Curret page is too high");
+            }
+            return _mainFoodRepo.ReadMainFood(filter).ToList();
         }
 
         public List<MainFood> GetMainFood()
         {
-            throw new NotImplementedException();
+            return _mainFoodRepo.ReadMainFood().ToList();
         }
 
         public MainFood GetMainFoodInstance()
         {
-            throw new NotImplementedException();
+            return new MainFood();
         }
 
         public MainFood UpdateMainFood(MainFood mainFoodUpdate)
         {
-            throw new NotImplementedException();
+            return _mainFoodRepo.UpdateMainFood(mainFoodUpdate);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace CantinaApp.Core.DomainServices
     {
         MainFood GetMainFoodByID(int id);
 
-        IEnumerable<MainFood> ReadMainFood();
+        IEnumerable<MainFood> ReadMainFood(Filter filter = null);
 
         MainFood CreateMainFood(MainFood mainFood);
 
@@ -24,5 +24,7 @@ namespace CantinaApp.Core.DomainServices
         MainFood ReadByIdIncludeAllergens(int id);
 
         MainFood ReadByIdIncludeFoodIcons(int id);
+
+        int Count();  
     }
 }
