@@ -8,6 +8,11 @@ namespace CantinaApp.InfaStructure.Data.SQLRepositories
 {
     public class SQLMainFoodRepositories : IMainFoodRepositories
     {
+        public int Count()
+        {
+            throw new NotImplementedException();
+        }
+
         public MainFood CreateMainFood(MainFood mainFood)
         {
             throw new NotImplementedException();
@@ -44,6 +49,11 @@ namespace CantinaApp.InfaStructure.Data.SQLRepositories
         }
 
         public IEnumerable<MainFood> ReadMainFood()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<MainFood> ReadMainFood(Filter filter = null)
         {
             throw new NotImplementedException();
         }
