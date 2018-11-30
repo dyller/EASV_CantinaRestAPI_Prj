@@ -7,8 +7,6 @@ namespace CantinaApp.Core.ApplicationServices
 {
     public interface IIngredientsServices
     {
-        Ingredients GetIngredientsInstance();
-
         List<Ingredients> GetIngredients();
 
         Ingredients AddIngredient(Ingredients ingredient);

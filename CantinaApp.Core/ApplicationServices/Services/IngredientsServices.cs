@@ -1,40 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using CantinaApp.Core.DomainServices;
 using CantinaApp.Core.Entity.Entities;
 
 namespace CantinaApp.Core.ApplicationServices.Services
 {
     public class IngredientsServices : IIngredientsServices
     {
+        readonly IIngredientsRepositories _ingredientsRepo;
+
+        public IngredientsServices(IIngredientsRepositories ingredientsRepo)
+        {
+            _ingredientsRepo = ingredientsRepo;
+        }
+
         public Ingredients AddIngredient(Ingredients ingredient)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(ingredient.IngredientType))
+            {
+                throw new InvalidOperationException("An ingredient needs a type."); 
+            }
+            return _ingredientsRepo.CreateIngredient(ingredient);
         }
 
         public Ingredients DeleteIngredient(int id)
         {
-            throw new NotImplementedException();
+            return _ingredientsRepo.DeleteIngredient(id);
         }
 
         public Ingredients FindIngredientId(int id)
         {
-            throw new NotImplementedException();
+            return _ingredientsRepo.ReadById(id);
         }
 
         public List<Ingredients> GetIngredients()
         {
-            throw new NotImplementedException();
-        }
-
-        public Ingredients GetIngredientsInstance()
-        {
-            throw new NotImplementedException();
+            return _ingredientsRepo.ReadIngredients().ToList();
         }
 
         public Ingredients UpdateIngredient(Ingredients ingredientUpdate)
         {
-            throw new NotImplementedException();
+            return _ingredientsRepo.UpdateIngredient(ingredientUpdate);
         }
     }
 }
