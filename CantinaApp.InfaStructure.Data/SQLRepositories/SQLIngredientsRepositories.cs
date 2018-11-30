@@ -1,46 +1,64 @@
 ﻿using CantinaApp.Core.DomainServices;
 using CantinaApp.Core.Entity.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CantinaApp.InfaStructure.Data.SQLRepositories
 {
     public class SQLIngredientsRepositories : IIngredientsRepositories
     {
+        readonly CantinaAppContext _ctx;
+
+        public SQLIngredientsRepositories(CantinaAppContext ctx)
+        {
+            _ctx = ctx;
+        }
+
         public Ingredients CreateIngredient(Ingredients ingredient)
         {
-            throw new NotImplementedException();
+            _ctx.Attach(ingredient).State = EntityState.Added;
+            _ctx.SaveChanges();
+            return ingredient;
         }
 
         public Ingredients DeleteIngredient(int id)
         {
-            throw new NotImplementedException();
+            var ingr = _ctx.Remove(new Ingredients() { Id = id }).Entity;
+            _ctx.SaveChanges();
+            return ingr;
         }
 
         public Ingredients GetIngredientsByID(int id)
         {
-            throw new NotImplementedException();
+            return _ctx.Ingredients.FirstOrDefault(m => m.Id == id);
         }
 
         public Ingredients ReadById(int id)
         {
-            throw new NotImplementedException();
+            return _ctx.Ingredients.Include(p => p.FoodIconType)
+                .FirstOrDefault(c => c.Id == id);
         }
 
         public Ingredients ReadByIdIncludeFoodIcon(int id)
         {
-            throw new NotImplementedException();
+            return _ctx.Ingredients
+                 .Include(o => o.FoodIconType)
+                 .FirstOrDefault(o => o.Id == id);
         }
 
         public IEnumerable<Ingredients> ReadIngredients()
         {
-            throw new NotImplementedException();
+            return _ctx.Ingredients.Include(o => o.FoodIconType);
         }
 
         public Ingredients UpdateIngredient(Ingredients ingredientUpdate)
         {
-            throw new NotImplementedException();
+            _ctx.Ingredients.Update(ingredientUpdate);
+            _ctx.SaveChanges();
+            return ingredientUpdate;
         }
     }
 }
