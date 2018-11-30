@@ -11,7 +11,7 @@ namespace CantinaApp.Core.DomainServices
 
         IEnumerable<MOTD> ReadMOTD();
 
-        MOTD CreateFoodIcon(MOTD motd);
+        MOTD CreateMOTD(MOTD motd);
 
         MOTD DeleteMOTD(int id);
 
