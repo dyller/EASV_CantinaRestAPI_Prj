@@ -30,7 +30,7 @@ namespace EASV_CantinaRestAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<MainFood> Get(int id)
         {
-            return _mainFoodService.FindMainFoodId(id);
+            return _mainFoodService.FindMainFoodIdIncludeIngredients(id);
         }
 
         // POST api/<controller>
@@ -46,17 +46,17 @@ namespace EASV_CantinaRestAPI.Controllers
         {
             var entity = _mainFoodService.UpdateMainFood(mFood);
             entity.MainFoodName = mFood.MainFoodName;
-            entity.Ingredients = mFood.Ingredients;
+            entity.IngredientsType = mFood.IngredientsType;
             entity.FoodIconType = mFood.FoodIconType;
-            entity.Allergens = mFood.Allergens;
+            entity.AllergensType = mFood.AllergensType;
             return entity;
         }
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<MainFood> Delete(int id)
         {
-            _mainFoodService.DeleteMainFood(id);
+            return _mainFoodService.DeleteMainFood(id);
         }
     }
 }

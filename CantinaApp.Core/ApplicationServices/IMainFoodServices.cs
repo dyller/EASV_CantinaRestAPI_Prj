@@ -17,10 +17,6 @@ namespace CantinaApp.Core.ApplicationServices
 
         MainFood FindMainFoodIdIncludeIngredients(int id);
 
-        MainFood FindMainFoodIdIncludeAllergents(int id);
-
-        MainFood FindMainFoodIdIncludeFoodIcon(int id);
-
         MainFood UpdateMainFood(MainFood mainFoodUpdate);
 
         List<MainFood> GetFilteredMainFood(Filter filter);

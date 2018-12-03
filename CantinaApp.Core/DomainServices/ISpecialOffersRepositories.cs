@@ -15,12 +15,8 @@ namespace CantinaApp.Core.DomainServices
 
         SpecialOffers DeleteSpecialOffers(int id);
 
-        SpecialOffers ReadById(int id);
-
         SpecialOffers UpdateSpecialOffers(SpecialOffers specialOffers);
 
-        SpecialOffers ReadByIdIncludeFoodIcons(int id);
-
-        SpecialOffers ReadByIdIncludeAllergens(int id);
+        SpecialOffers ReadByIdIncludeIngr(int id);
     }
 }

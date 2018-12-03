@@ -15,6 +15,8 @@ namespace CantinaApp.Core.ApplicationServices
 
         Ingredients FindIngredientId(int id);
 
+        Ingredients FindIngredientIdIncludeMainFood(int id);
+
         Ingredients UpdateIngredient(Ingredients ingredientUpdate);
     }
 }

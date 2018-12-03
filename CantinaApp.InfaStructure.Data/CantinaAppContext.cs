@@ -18,10 +18,10 @@ namespace CantinaApp.InfaStructure.Data
         {
             //Main food can have many ingredients
             modelBuilder.Entity<MainFood>()
-                .HasMany(p => p.Ingredients);
+                .HasMany(p => p.IngredientsType);
             //Main Food can have many allergens
             modelBuilder.Entity<MainFood>()
-                .HasMany(a => a.Allergens);
+                .HasMany(a => a.AllergensType);
             //Main Food can only have one Icon
             modelBuilder.Entity<MainFood>()
                 .HasOne(a => a.FoodIconType);
@@ -31,10 +31,10 @@ namespace CantinaApp.InfaStructure.Data
             //Special Offers can only have one Icon
             modelBuilder.Entity<SpecialOffers>()
                 .HasOne(a => a.FoodIconType);
-            //Allergens can only have one Icon
+            //AllergensType can only have one Icon
             modelBuilder.Entity<Allergen>()
                 .HasOne(a => a.FoodIconType);
-            //Main food has PK ID and Ingredients
+            //Main food has PK ID and IngredientsType
             modelBuilder.Entity<MainFood>()
                 .HasKey(m => new { m.Id });
 
@@ -45,6 +45,7 @@ namespace CantinaApp.InfaStructure.Data
         public DbSet<FoodIcon> FoodIcon { get; set; }
         public DbSet<Ingredients> Ingredients { get; set; }
         public DbSet<Allergen> Allergen { get; set; }
+        public DbSet<SpecialOffers> SpecialOffers { get; set; }
         public DbSet<MOTD> MOTD { get; set; }
     }
 }

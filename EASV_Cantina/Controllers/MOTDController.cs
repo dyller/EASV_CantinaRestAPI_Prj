@@ -23,8 +23,6 @@ namespace EASV_CantinaRestAPI.Controllers
             _MOTDServices = MOTDServices;
         }
 
-
-
         // GET: api/MOTD
         [HttpGet]
         public IEnumerable<MOTD> GetMOTD()
@@ -41,9 +39,11 @@ namespace EASV_CantinaRestAPI.Controllers
 
         // PUT: api/MOTD/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMOTD([FromRoute] int id, [FromBody] MOTD mOTD)
+        public ActionResult<MOTD> PutMOTD([FromRoute] int id, [FromBody] MOTD mOTD)
         {
-            return null;
+            var entity = _MOTDServices.UpdateMOTD(mOTD);
+            entity.TipOfTheDay = mOTD.TipOfTheDay;
+            return entity;
         }
 
         // POST: api/MOTD

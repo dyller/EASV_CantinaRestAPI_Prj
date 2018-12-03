@@ -24,13 +24,6 @@ namespace CantinaApp.InfaStructure.Data.SQLRepositories
             return ingredient;
         }
 
-        public Ingredients DeleteIngredient(int id)
-        {
-            var ingr = _ctx.Remove(new Ingredients() { Id = id }).Entity;
-            _ctx.SaveChanges();
-            return ingr;
-        }
-
         public Ingredients GetIngredientsByID(int id)
         {
             return _ctx.Ingredients.FirstOrDefault(m => m.Id == id);
@@ -59,6 +52,14 @@ namespace CantinaApp.InfaStructure.Data.SQLRepositories
             _ctx.Ingredients.Update(ingredientUpdate);
             _ctx.SaveChanges();
             return ingredientUpdate;
+        }
+
+        public Ingredients DeleteIngredient(int id)
+        {
+            var ingrDelete = _ctx.Ingredients.ToList().FirstOrDefault(b => b.Id == id);
+            _ctx.Ingredients.Remove(ingrDelete);
+            _ctx.SaveChanges();
+            return ingrDelete;
         }
     }
 }

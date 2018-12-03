@@ -1,40 +1,44 @@
-﻿using CantinaApp.Core.Entity.Entities;
+﻿using CantinaApp.Core.DomainServices;
+using CantinaApp.Core.Entity.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CantinaApp.Core.ApplicationServices.Services
 {
     public class FoodIconServices : IFoodIconServices
     {
+        readonly IFoodIconRepositories _foodIcnRepo;
+
+        public FoodIconServices(IFoodIconRepositories foodIcnRepo)
+        {
+            _foodIcnRepo = foodIcnRepo;
+        }
+
         public FoodIcon AddFoodIcon(FoodIcon foodIcon)
         {
-            throw new NotImplementedException();
+            return _foodIcnRepo.CreateFoodIcon(foodIcon);
         }
 
         public FoodIcon DeleteFoodIcon(int id)
         {
-            throw new NotImplementedException();
+            return _foodIcnRepo.DeleteFoodIcon(id);
         }
 
-        public FoodIcon FindFoodIconId(int id)
+        public FoodIcon FindFoodIconById(int id)
         {
-            throw new NotImplementedException();
+            return _foodIcnRepo.ReadMFoodIcon().ToList().FirstOrDefault(spc => spc.Id == id);
         }
 
-        public List<Allergen> GetFoodIcon()
+        public List<FoodIcon> GetFoodIcon()
         {
-            throw new NotImplementedException();
-        }
-
-        public FoodIcon GetFoodIconInstance()
-        {
-            throw new NotImplementedException();
+            return _foodIcnRepo.ReadMFoodIcon().ToList();
         }
 
         public FoodIcon UpdateFoodIcon(FoodIcon foodIconUpdate)
         {
-            throw new NotImplementedException();
+            return _foodIcnRepo.UpdateFoodIcon(foodIconUpdate);
         }
     }
 }

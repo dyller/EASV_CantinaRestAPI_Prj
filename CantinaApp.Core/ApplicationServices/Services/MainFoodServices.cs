@@ -45,18 +45,6 @@ namespace CantinaApp.Core.ApplicationServices.Services
             return _mainFoodRepo.ReadById(id);
         }
 
-        public MainFood FindMainFoodIdIncludeAllergents(int id)
-        {
-            var mFood = _mainFoodRepo.ReadByIdIncludeAllergens(id);
-            return mFood;
-        }
-
-        public MainFood FindMainFoodIdIncludeFoodIcon(int id)
-        {
-            var mFood = _mainFoodRepo.ReadByIdIncludeFoodIcons(id);
-            return mFood;
-        }
-
         public MainFood FindMainFoodIdIncludeIngredients(int id)
         {
             var mFood = _mainFoodRepo.ReadByIdIncludeIngredients(id);

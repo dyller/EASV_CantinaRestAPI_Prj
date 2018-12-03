@@ -10,5 +10,7 @@ namespace CantinaApp.Core.Entity.Entities
         public String SpecialOfferName { get; set; }
         public Double Price { get; set; }
         public FoodIcon FoodIconType { get; set; }
+        public Allergen AllergenType { get; set; }
+        public Ingredients IngredientsType { get; set; }
     }
 }

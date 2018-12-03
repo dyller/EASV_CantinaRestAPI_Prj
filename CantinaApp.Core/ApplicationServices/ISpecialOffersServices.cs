@@ -7,15 +7,13 @@ namespace CantinaApp.Core.ApplicationServices
 {
     public interface ISpecialOffersServices
     {
-        SpecialOffers GetMOTDsInstance();
+        SpecialOffers GetSpecialOffersById (int id);
 
-        List<SpecialOffers> GetMOTDs();
+        List<SpecialOffers> GetSpecialOffers();
 
         SpecialOffers AddSpecialOffer(SpecialOffers specialOffers);
 
         SpecialOffers DeleteSpecialOffer(int id);
-
-        SpecialOffers FindSpecialOfferId(int id);
 
         SpecialOffers UpdateSpecialOffer(SpecialOffers specialOffers);
     }

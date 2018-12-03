@@ -8,8 +8,8 @@ namespace CantinaApp.Core.Entity.Entities
     {
         public int Id { get; set; }
         public String MainFoodName { get; set; }
-        public List<Ingredients> Ingredients { get; set; }
-        public List<Allergen> Allergens { get; set; }
+        public List<Ingredients> IngredientsType { get; set; }
+        public List<Allergen> AllergensType { get; set; }
         public FoodIcon FoodIconType { get; set; }
     }
 }

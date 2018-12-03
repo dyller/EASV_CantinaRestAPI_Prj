@@ -7,15 +7,13 @@ namespace CantinaApp.Core.ApplicationServices
 {
     public interface IFoodIconServices
     {
-        FoodIcon GetFoodIconInstance();
+        FoodIcon FindFoodIconById(int id);
 
-        List<Allergen> GetFoodIcon();
+        List<FoodIcon> GetFoodIcon();
 
         FoodIcon AddFoodIcon(FoodIcon foodIcon);
 
         FoodIcon DeleteFoodIcon(int id);
-
-        FoodIcon FindFoodIconId(int id);
 
         FoodIcon UpdateFoodIcon(FoodIcon foodIconUpdate);
     }

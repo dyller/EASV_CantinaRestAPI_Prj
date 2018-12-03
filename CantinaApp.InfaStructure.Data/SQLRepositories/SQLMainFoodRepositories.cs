@@ -29,13 +29,6 @@ namespace CantinaApp.InfaStructure.Data.SQLRepositories
             return mainFood;
         }
 
-        public MainFood DeleteMainFood(int id)
-        {
-            var mFood = _ctx.Remove(new MainFood() { Id = id }).Entity;
-            _ctx.SaveChanges();
-            return mFood;
-        }
-
         public MainFood GetMainFoodByID(int id)
         {
             return _ctx.MainFood.FirstOrDefault(m => m.Id == id);
@@ -44,42 +37,40 @@ namespace CantinaApp.InfaStructure.Data.SQLRepositories
         public MainFood ReadById(int id)
         {
             return _ctx.MainFood.Include(p => p.FoodIconType)
-                .Include(m => m.Allergens).Include(f => f.Ingredients)
                 .FirstOrDefault(c => c.Id == id);
-        }
-
-        public MainFood ReadByIdIncludeAllergens(int id)
-        {
-            return _ctx.MainFood
-                 .Include(o => o.Allergens)
-                 .FirstOrDefault(o => o.Id == id);
-        }
-
-        public MainFood ReadByIdIncludeFoodIcons(int id)
-        {
-            return _ctx.MainFood
-                 .Include(o => o.FoodIconType)
-                 .FirstOrDefault(o => o.Id == id);
         }
 
         public MainFood ReadByIdIncludeIngredients(int id)
         {
-            return _ctx.MainFood
-                 .Include(o => o.Ingredients)
-                 .FirstOrDefault(o => o.Id == id);
+            return _ctx.MainFood.Include(p => p.FoodIconType)
+                .Include(m => m.AllergensType).Include(f => f.IngredientsType)
+                .FirstOrDefault(c => c.Id == id);
         }
 
         public IEnumerable<MainFood> ReadMainFood(Filter filter = null)
         {
-            return _ctx.MainFood.Include(o => o.FoodIconType)
-                .Include(m => m.Allergens).Include(f => f.Ingredients);
+            if (filter == null)
+            {
+                return _ctx.MainFood;
+            }
+            return _ctx.MainFood.Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
+                .Take(filter.ItemsPrPage);
         }
 
         public MainFood UpdateMainFood(MainFood foodUpdate)
         {
-            _ctx.MainFood.Update(foodUpdate);
+            _ctx.Attach(foodUpdate).State = EntityState.Modified;
+            _ctx.Entry(foodUpdate).Reference(o => o.MainFoodName).IsModified = true;
             _ctx.SaveChanges();
             return foodUpdate;
+        }
+
+        public MainFood DeleteMainFood(int id)
+        {
+            var mFoodDelete = _ctx.MainFood.ToList().FirstOrDefault(b => b.Id == id);
+            _ctx.MainFood.Remove(mFoodDelete);
+            _ctx.SaveChanges();
+            return mFoodDelete;
         }
     }
 }

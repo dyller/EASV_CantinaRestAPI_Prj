@@ -1,46 +1,66 @@
 ﻿using CantinaApp.Core.DomainServices;
 using CantinaApp.Core.Entity.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CantinaApp.InfaStructure.Data.SQLRepositories
 {
     public class SQLAllergenRepositories : IAllergensRepositories
     {
-        public Allergen CreateAllergen(Allergen allergen)
+        readonly CantinaAppContext _ctx;
+
+        public SQLAllergenRepositories(CantinaAppContext ctx)
         {
-            throw new NotImplementedException();
+            _ctx = ctx;
         }
 
-        public Allergen DeleteAllergen(int id)
+        public Allergen CreateAllergen(Allergen allergen)
         {
-            throw new NotImplementedException();
+            _ctx.Attach(allergen).State = EntityState.Added;
+            _ctx.SaveChanges();
+            return allergen;
         }
 
         public Allergen GeAllergenByID(int id)
         {
-            throw new NotImplementedException();
+            return _ctx.Allergen.FirstOrDefault(m => m.Id == id);
         }
 
         public Allergen ReadById(int id)
         {
-            throw new NotImplementedException();
+            return _ctx.Allergen.Include(p => p.FoodIconType)
+                        .FirstOrDefault(c => c.Id == id);
         }
 
         public IEnumerable<Allergen> ReadMAllergen()
         {
-            throw new NotImplementedException();
+            return _ctx.Allergen;
         }
 
         public Allergen ReadyByIdIncludeFoodIcon(int id)
         {
-            throw new NotImplementedException();
+            return _ctx.Allergen
+                         .Include(o => o.FoodIconType)
+                         .FirstOrDefault(o => o.Id == id);
         }
 
         public Allergen UpdateAllergen(Allergen allergenUpdate)
         {
-            throw new NotImplementedException();
+            _ctx.Attach(allergenUpdate).State = EntityState.Modified;
+            _ctx.Entry(allergenUpdate).Reference(o => o.AllergenType).IsModified = true;
+            _ctx.SaveChanges();
+            return allergenUpdate;
+        }
+
+        public Allergen DeleteAllergen(int id)
+        {
+            var alrgDelete = _ctx.Allergen.ToList().FirstOrDefault(b => b.Id == id);
+            _ctx.Allergen.Remove(alrgDelete);
+            _ctx.SaveChanges();
+            return alrgDelete;
         }
     }
 }

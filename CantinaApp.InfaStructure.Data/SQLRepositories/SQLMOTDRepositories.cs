@@ -32,12 +32,6 @@ namespace CantinaApp.InfaStructure.Data.SQLRepositories
             _ctx.SaveChanges();
             return MOTDDeleted;
         }
-
-        public MOTD GetFoodIconByID(int id)
-        {
-            throw new NotImplementedException();
-        }
-
        
         public IEnumerable<MOTD> ReadMOTD()
         {
@@ -46,7 +40,10 @@ namespace CantinaApp.InfaStructure.Data.SQLRepositories
 
         public MOTD UpdateMOTD(MOTD motdUpdate)
         {
-            throw new NotImplementedException();
+            _ctx.Attach(motdUpdate).State = EntityState.Modified;
+            _ctx.Entry(motdUpdate).Reference(o => o.TipOfTheDay).IsModified = true;
+            _ctx.SaveChanges();
+            return motdUpdate;
         }
     }
 }

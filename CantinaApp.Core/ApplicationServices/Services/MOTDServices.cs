@@ -10,6 +10,7 @@ namespace CantinaApp.Core.ApplicationServices.Services
     public class MOTDServices : IMOTDServices
     {
         readonly IMOTDRepositories _MOTDRepo;
+
         public MOTDServices(IMOTDRepositories MOTDRepo)
         {
             _MOTDRepo = MOTDRepo;
@@ -17,12 +18,11 @@ namespace CantinaApp.Core.ApplicationServices.Services
 
         public MOTD AddMOTD(MOTD motd)
         {
-            return _MOTDRepo.CreateMOTD(motd) ;
+            return _MOTDRepo.CreateMOTD(motd);
         }
 
         public MOTD DeleteMOTD(int id)
         {
-            
             return _MOTDRepo.DeleteMOTD(id);
         }
         

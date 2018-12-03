@@ -21,10 +21,6 @@ namespace CantinaApp.Core.DomainServices
 
         MainFood ReadByIdIncludeIngredients(int id);
 
-        MainFood ReadByIdIncludeAllergens(int id);
-
-        MainFood ReadByIdIncludeFoodIcons(int id);
-
         int Count();  
     }
 }

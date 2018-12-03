@@ -7,8 +7,6 @@ namespace CantinaApp.Core.DomainServices
 {
     public interface IMOTDRepositories
     {
-        MOTD GetFoodIconByID(int id);
-
         IEnumerable<MOTD> ReadMOTD();
 
         MOTD CreateMOTD(MOTD motd);

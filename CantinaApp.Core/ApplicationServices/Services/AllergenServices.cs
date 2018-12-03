@@ -1,40 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using CantinaApp.Core.DomainServices;
 using CantinaApp.Core.Entity.Entities;
 
 namespace CantinaApp.Core.ApplicationServices.Services
 {
     public class AllergenServices : IAllergenServices
     {
+        readonly IAllergensRepositories _allergensRepo;
+
+        public AllergenServices(IAllergensRepositories allergensRepo)
+        {
+            _allergensRepo = allergensRepo;
+        }
+
         public Allergen AddAllergen(Allergen allergen)
         {
-            throw new NotImplementedException();
+            return _allergensRepo.CreateAllergen(allergen);
         }
 
         public Allergen DeleteAllergen(int id)
         {
-            throw new NotImplementedException();
+            return _allergensRepo.DeleteAllergen(id);
         }
 
-        public Allergen FindOwnerById(int id)
+        public Allergen FindAllergenId(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Allergen GetAllergenInstance()
-        {
-            throw new NotImplementedException();
+            return _allergensRepo.ReadById(id);
         }
 
         public List<Allergen> GetAllergens()
         {
-            throw new NotImplementedException();
+            return _allergensRepo.ReadMAllergen().ToList();
         }
 
-        public Allergen UpdateOwner(Allergen allergenUpdate)
+        public Allergen UpdateAllergen(Allergen allergenUpdate)
         {
-            throw new NotImplementedException();
+            return _allergensRepo.UpdateAllergen(allergenUpdate);
         }
     }
 }

@@ -1,41 +1,52 @@
 ﻿using CantinaApp.Core.DomainServices;
 using CantinaApp.Core.Entity.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CantinaApp.InfaStructure.Data.SQLRepositories
 {
     public class SQLFoodIconRepositories : IFoodIconRepositories
     {
-        public FoodIcon CreateFoodIcon(FoodIcon foodIcon)
+        readonly CantinaAppContext _ctx;
+
+        public SQLFoodIconRepositories(CantinaAppContext ctx)
         {
-            throw new NotImplementedException();
+            _ctx = ctx;
         }
 
-        public FoodIcon DeleteFoodIcon(int id)
+        public FoodIcon CreateFoodIcon(FoodIcon foodIcon)
         {
-            throw new NotImplementedException();
+            _ctx.Attach(foodIcon).State = EntityState.Added;
+            _ctx.SaveChanges();
+            return foodIcon;
         }
 
         public FoodIcon GetFoodIconByID(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public FoodIcon ReadById(int id)
-        {
-            throw new NotImplementedException();
+            return _ctx.FoodIcon.FirstOrDefault(m => m.Id == id);
         }
 
         public IEnumerable<FoodIcon> ReadMFoodIcon()
         {
-            throw new NotImplementedException();
+            return _ctx.FoodIcon;
         }
 
         public FoodIcon UpdateFoodIcon(FoodIcon foodIconUpdate)
         {
-            throw new NotImplementedException();
+            var updated = _ctx.FoodIcon.Update(foodIconUpdate).Entity;
+            _ctx.SaveChanges();
+            return updated;
+        }
+
+        public FoodIcon DeleteFoodIcon(int id)
+        {
+            var iconDelete = _ctx.FoodIcon.ToList().FirstOrDefault(b => b.Id == id);
+            _ctx.FoodIcon.Remove(iconDelete);
+            _ctx.SaveChanges();
+            return iconDelete;
         }
     }
 }
