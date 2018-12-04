@@ -13,7 +13,7 @@ namespace CantinaApp.InfaStructure.Data
         {
 
         }
-
+        //I didn't fuckup
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Main food can have many ingredients
