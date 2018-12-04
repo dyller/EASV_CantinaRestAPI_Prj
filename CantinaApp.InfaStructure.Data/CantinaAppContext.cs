@@ -17,11 +17,15 @@ namespace CantinaApp.InfaStructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Main food can have many ingredients
-            modelBuilder.Entity<MainFood>()
-                .HasMany(p => p.IngredientsType);
+            modelBuilder.Entity<Ingredients>()
+                .HasOne(p => p.MainFoodType)
+                .WithMany(s => s.IngredientsType)
+                .OnDelete(DeleteBehavior.SetNull);
             //Main Food can have many allergens
-            modelBuilder.Entity<MainFood>()
-                .HasMany(a => a.AllergensType);
+            modelBuilder.Entity<Allergen>()
+                .HasOne(a => a.MainFoodType)
+                .WithMany(a => a.AllergensType)
+                .OnDelete(DeleteBehavior.SetNull);
             //Main Food can only have one Icon
             modelBuilder.Entity<MainFood>()
                 .HasOne(a => a.FoodIconType);
@@ -34,9 +38,6 @@ namespace CantinaApp.InfaStructure.Data
             //AllergensType can only have one Icon
             modelBuilder.Entity<Allergen>()
                 .HasOne(a => a.FoodIconType);
-            //Main food has PK ID and IngredientsType
-            modelBuilder.Entity<MainFood>()
-                .HasKey(m => new { m.Id });
 
         }
         //Tables
